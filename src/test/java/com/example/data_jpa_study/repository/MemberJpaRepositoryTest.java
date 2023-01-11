@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -38,9 +40,15 @@ class MemberJpaRepositoryTest {
         memberJpaRepository.save(member1);
         memberJpaRepository.save(member2);
 
+        //단건 조회 검증
         Member findMember1 = memberJpaRepository.findById(member1.getId()).get();
         Member findMember2 = memberJpaRepository.findById(member2.getId()).get();
         assertThat(findMember1).isEqualTo(member1);
         assertThat(findMember2).isEqualTo(member2);
+
+        //리스트 조회 검증
+        List<Member> all = memberJpaRepository.findAll();
+        assertThat(all.size()).isEqualTo(2);
+
     }
 }
