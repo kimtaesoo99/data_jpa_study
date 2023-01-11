@@ -2,6 +2,8 @@ package com.example.data_jpa_study.repository;
 
 import com.example.data_jpa_study.dto.MemberDto;
 import com.example.data_jpa_study.entity.Member;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,4 +34,7 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
     List<Member> findListByUsername(String username); //컬렉션
     Member findMemberByUsername(String username); //단건
     Optional<Member> findOptionalByUsername(String username); // 단건 Optional
+
+    @Query(value = "select m from Member m left join m.team t",countQuery = "select count(m) from Member m")
+    Page<Member> findByAge(int age, Pageable pageable);
 }
