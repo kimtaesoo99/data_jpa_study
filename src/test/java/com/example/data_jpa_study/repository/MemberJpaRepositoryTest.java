@@ -50,5 +50,8 @@ class MemberJpaRepositoryTest {
         List<Member> all = memberJpaRepository.findAll();
         assertThat(all.size()).isEqualTo(2);
 
+        //카운트 검증
+        long count = memberJpaRepository.count();
+        assertThat(count).isEqualTo(2);
     }
 }
