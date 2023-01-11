@@ -53,5 +53,11 @@ class MemberJpaRepositoryTest {
         //카운트 검증
         long count = memberJpaRepository.count();
         assertThat(count).isEqualTo(2);
+
+        //삭제 검증
+        memberJpaRepository.delete(member1);
+        memberJpaRepository.delete(member2);
+        long deleteCount = memberJpaRepository.count();
+        assertThat(deleteCount).isEqualTo(0);
     }
 }
