@@ -22,6 +22,11 @@ public class MemberController {
         return member.getUsername();
     }
 
+    @GetMapping("/members2/{id}")
+    public String findMember2(@PathVariable("id") Member member){
+        return member.getUsername();
+    }
+
     @PostConstruct
     public void init(){
         memberRepository.save(new Member("userA"));
